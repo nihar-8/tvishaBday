@@ -16,14 +16,14 @@
         color: gold;
         font-family: "Georgia", serif;
         overflow: hidden;
-        touch-action: manipulation; /* Add this to improve touch handling */
+        touch-action: manipulation;
       }
       .container {
         display: flex;
         transition: transform 1s ease-in-out;
-        width: 700%;
-        height: 100vh;
-        overflow: hidden; /* Prevent any overflow during transitions */
+        width: 100%; /* Full width */
+        height: 100vh; /* Full height */
+        flex-direction: column;
       }
       .card {
         flex: 0 0 100%;
@@ -39,9 +39,9 @@
         overflow: hidden; /* Prevent content overflow */
       }
       .card img {
-        max-width: 80%; /* Ensure images fit properly */
-        max-height: 60%; /* Constrain image height so it doesn't overflow */
-        object-fit: contain; /* Maintain image aspect ratio */
+        max-width: 80%;
+        max-height: 60%;
+        object-fit: contain;
         border-radius: 10px;
         margin: 20px 0;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -149,21 +149,24 @@
       const music = document.getElementById("bgMusic");
       let isMuted = false;
 
+      // Ensure music starts only after user interaction
       function nextCard() {
-        // Play music on the first card if it hasn't started yet
         if (cardIndex === 0 && music.paused) {
           music.play().catch(() => {});
         }
         cardIndex++;
-        container.style.transform = `translateX(-${cardIndex * 100}vw)`;
+        container.style.transform = `translateY(-${
+          cardIndex * 100
+        }%)`; /* Vertical sliding */
       }
+
       function closeCard() {
-        // Reset to the cover card and stop music
         cardIndex = 0;
-        container.style.transform = `translateX(0)`;
+        container.style.transform = `translateY(0)`; /* Reset to the first card */
         music.pause();
-        music.currentTime = 0; // Reset to start
+        music.currentTime = 0;
       }
+
       function toggleMusic() {
         isMuted = !isMuted;
         music.muted = isMuted;
