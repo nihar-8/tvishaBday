@@ -49,6 +49,30 @@
         border-radius: 10px;
         margin: 20px 0;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        opacity: 0; /* Start with image hidden */
+      }
+
+      .card img.animate {
+        animation: fadeIn 1.5s ease-in-out, scaleUp 1.5s ease-out;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes scaleUp {
+        0% {
+          transform: scale(0.8);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
 
       .card h1,
@@ -151,7 +175,7 @@
     <div class="container" id="cardContainer">
       <!-- Cover -->
       <div class="card">
-        <img src="cake.png" alt="Cake and lights" />
+        <img src="cake.png" alt="Cake and lights" class="animate" />
         <h1>Open with Love & a Smile</h1>
         <p>Because something beautiful is waiting for you inside.</p>
         <button class="button" onclick="nextCard()">Open</button>
@@ -213,8 +237,21 @@
         if (cardIndex === 0 && music.paused) {
           music.play().catch(() => {});
         }
+
+        // Remove previous image animation class
+        const currentCardImg = document
+          .querySelectorAll(".card")
+          [cardIndex].querySelector("img");
+        currentCardImg.classList.remove("animate");
+
         cardIndex++;
         container.style.transform = `translateX(-${cardIndex * 100}vw)`;
+
+        // Add animation class to the new image
+        const nextCardImg = document
+          .querySelectorAll(".card")
+          [cardIndex].querySelector("img");
+        nextCardImg.classList.add("animate");
       }
 
       function closeCard() {
@@ -222,6 +259,12 @@
         container.style.transform = `translateX(0)`;
         music.pause();
         music.currentTime = 0;
+
+        // Add animation to the cover image again
+        const coverImage = document
+          .querySelectorAll(".card")[0]
+          .querySelector("img");
+        coverImage.classList.add("animate");
       }
 
       function generateConfetti() {
