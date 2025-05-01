@@ -29,26 +29,26 @@
       }
 
       .card {
+        display: flex;
+        flex-direction: row;
         flex: 0 0 100%;
         height: 100vh; /* Each card takes full screen height */
         padding: 30px 20px;
         text-align: center;
         position: relative;
         background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Left side - Text */
+      .card .text-section {
+        flex: 1;
+        padding-right: 20px; /* Space between text and image */
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        overflow: hidden; /* Prevent content overflow */
-      }
-
-      .card img {
-        max-width: 80%;
-        max-height: 60%;
-        object-fit: contain;
-        border-radius: 10px;
-        margin: 20px 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        align-items: flex-start;
       }
 
       .card h1,
@@ -61,6 +61,22 @@
         font-size: 1.2rem;
         max-width: 80%;
         margin: 0 auto;
+      }
+
+      /* Right side - Image */
+      .card .image-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       }
 
       .button {
@@ -91,10 +107,19 @@
 
       /* Mobile-specific adjustments */
       @media (max-width: 768px) {
+        .card {
+          flex-direction: column; /* Stack text and image vertically on small screens */
+        }
+
+        .card .image-section {
+          margin-bottom: 20px;
+        }
+
         .card h1,
         .card h2 {
           font-size: 1.5rem;
         }
+
         .card p {
           font-size: 1rem;
         }
@@ -110,55 +135,84 @@
     <div class="container" id="cardContainer">
       <!-- Cover -->
       <div class="card">
-        <h1>Open with Love & a Smile</h1>
-        <p>Because something beautiful is waiting for you inside.</p>
-        <button class="button" onclick="nextCard()">Open</button>
+        <div class="text-section">
+          <h1>Open with Love & a Smile</h1>
+          <p>Because something beautiful is waiting for you inside.</p>
+          <button class="button" onclick="nextCard()">Open</button>
+        </div>
+        <div class="image-section">
+          <img src="img4.jpg" alt="Cover Image" />
+        </div>
       </div>
 
       <!-- Card 1 -->
       <div class="card">
-        <img src="img4.jpg" alt="Sunlight smile" />
-        <h2>Every time I see you, my heart smiles.</h2>
-        <p>Just knowing you exist makes the world a little brighter for me.</p>
-        <button class="button" onclick="nextCard()">Next</button>
+        <div class="text-section">
+          <h2>Every time I see you, my heart smiles.</h2>
+          <p>
+            Just knowing you exist makes the world a little brighter for me.
+          </p>
+          <button class="button" onclick="nextCard()">Next</button>
+        </div>
+        <div class="image-section">
+          <img src="img4.jpg" alt="Sunlight smile" />
+        </div>
       </div>
 
       <!-- Card 2 -->
       <div class="card">
-        <img src="img5.jpg" alt="Romantic sunrise" />
-        <h2>You're like a sunrise—soft, stunning, and impossible to ignore.</h2>
-        <p>There's warmth in your presence that words can't quite capture.</p>
-        <button class="button" onclick="nextCard()">Next</button>
+        <div class="text-section">
+          <h2>
+            You're like a sunrise—soft, stunning, and impossible to ignore.
+          </h2>
+          <p>There's warmth in your presence that words can't quite capture.</p>
+          <button class="button" onclick="nextCard()">Next</button>
+        </div>
+        <div class="image-section">
+          <img src="img5.jpg" alt="Romantic sunrise" />
+        </div>
       </div>
 
       <!-- Card 3 -->
       <div class="card">
-        <img src="img3.jpg" alt="Magic sparkles" />
-        <h2>You don’t realize how much magic you carry.</h2>
-        <p>It's in your laughter, your kindness, your every little moment.</p>
-        <button class="button" onclick="nextCard()">Next</button>
+        <div class="text-section">
+          <h2>You don’t realize how much magic you carry.</h2>
+          <p>It's in your laughter, your kindness, your every little moment.</p>
+          <button class="button" onclick="nextCard()">Next</button>
+        </div>
+        <div class="image-section">
+          <img src="img3.jpg" alt="Magic sparkles" />
+        </div>
       </div>
 
       <!-- Card 4 -->
       <div class="card">
-        <img src="img1.jpg" alt="Cozy comfort" />
-        <h2>Even in silence, I feel close to you.</h2>
-        <p>
-          That’s the kind of comfort you bring—quiet, warm, and full of peace.
-        </p>
-        <button class="button" onclick="nextCard()">Next</button>
+        <div class="text-section">
+          <h2>Even in silence, I feel close to you.</h2>
+          <p>
+            That’s the kind of comfort you bring—quiet, warm, and full of peace.
+          </p>
+          <button class="button" onclick="nextCard()">Next</button>
+        </div>
+        <div class="image-section">
+          <img src="img1.jpg" alt="Cozy comfort" />
+        </div>
       </div>
 
       <!-- Final Birthday Card -->
       <div class="card">
-        <img src="img2.jpg" alt="Cake and lights" />
-        <h2>Happy Birthday, beautiful soul.</h2>
-        <p>
-          May today be as lovely, vibrant, and unforgettable as you are.<br />You
-          deserve more than wishes—you deserve wonder, joy, and all the love
-          life can give.<br /><br />I’m really lucky to know you.
-        </p>
-        <button class="button" onclick="closeCard()">Close</button>
+        <div class="text-section">
+          <h2>Happy Birthday, beautiful soul.</h2>
+          <p>
+            May today be as lovely, vibrant, and unforgettable as you are.<br />You
+            deserve more than wishes—you deserve wonder, joy, and all the love
+            life can give.<br /><br />I’m really lucky to know you.
+          </p>
+          <button class="button" onclick="closeCard()">Close</button>
+        </div>
+        <div class="image-section">
+          <img src="img2.jpg" alt="Cake and lights" />
+        </div>
       </div>
     </div>
 
@@ -168,7 +222,6 @@
       const music = document.getElementById("bgMusic");
       let isMuted = false;
 
-      // Ensure music starts only after user interaction
       function nextCard() {
         if (cardIndex === 0 && music.paused) {
           music.play().catch(() => {});
