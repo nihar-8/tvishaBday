@@ -16,16 +16,18 @@
         color: gold;
         font-family: "Georgia", serif;
         overflow: hidden;
+        touch-action: manipulation; /* Add this to improve touch handling */
       }
       .container {
         display: flex;
         transition: transform 1s ease-in-out;
-        width: 700%; /* 7 cards */
+        width: 700%;
         height: 100vh;
+        overflow: hidden; /* Prevent any overflow during transitions */
       }
       .card {
-        flex: 0 0 100vw;
-        height: 100vh;
+        flex: 0 0 100%;
+        height: 100vh; /* Ensure each card takes full viewport height */
         padding: 30px 20px;
         text-align: center;
         position: relative;
@@ -34,9 +36,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        overflow: hidden; /* Prevent content overflow */
       }
       .card img {
-        width: 80%;
+        max-width: 80%; /* Ensure images fit properly */
+        max-height: 60%; /* Constrain image height so it doesn't overflow */
+        object-fit: contain; /* Maintain image aspect ratio */
         border-radius: 10px;
         margin: 20px 0;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
